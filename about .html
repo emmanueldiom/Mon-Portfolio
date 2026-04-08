@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emmanuel — About</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #060a14;
+        --surface: #0d1526;
+        --surface2: #111d35;
+        --accent: #00d4ff;
+        --accent2: #7c3aed;
+        --accent3: #f59e0b;
+        --text: #e2e8f0;
+        --muted: #64748b;
+        --border: rgba(255, 255, 255, 0.06);
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-weight: 300;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+
+      /* ─── NOISE OVERLAY ─── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 999;
+        opacity: 0.4;
+      }
+
+      /* ─── GLOW BLOBS ─── */
+      .blob {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+        z-index: 0;
+      }
+      .blob-1 {
+        width: 600px;
+        height: 600px;
+        background: rgba(0, 212, 255, 0.07);
+        top: -200px;
+        left: -200px;
+      }
+      .blob-2 {
+        width: 500px;
+        height: 500px;
+        background: rgba(124, 58, 237, 0.06);
+        bottom: 100px;
+        right: -150px;
+      }
+      .blob-3 {
+        width: 300px;
+        height: 300px;
+        background: rgba(245, 158, 11, 0.05);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      /* ─── NAV ─── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 8%;
+        backdrop-filter: blur(20px);
+        background: rgba(6, 10, 20, 0.7);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 20px;
+        letter-spacing: -0.5px;
+      }
+      .nav-logo span {
+        color: var(--accent);
+      }
+      .nav-back {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 400;
+        transition: color 0.3s;
+        letter-spacing: 0.5px;
+      }
+      .nav-back:hover {
+        color: var(--accent);
+      }
+      .nav-back svg {
+        transition: transform 0.3s;
+      }
+      .nav-back:hover svg {
+        transform: translateX(-4px);
+      }
+
+      /* ─── HERO SECTION ─── */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 120px 8% 80px;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 80px;
+        align-items: center;
+        width: 100%;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        background: rgba(0, 212, 255, 0.08);
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        border-radius: 100px;
+        font-size: 12px;
+        color: var(--accent);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 24px;
+      }
+      .hero-tag::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.8);
+        }
+      }
+      .hero-name {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(52px, 7vw, 88px);
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: -3px;
+        margin-bottom: 16px;
+      }
+      .hero-name .line-2 {
+        display: block;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-role {
+        font-size: 18px;
+        color: var(--muted);
+        margin-bottom: 32px;
+        font-weight: 400;
+      }
+      .hero-role strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+      .hero-desc {
+        font-size: 16px;
+        color: #94a3b8;
+        max-width: 520px;
+        margin-bottom: 40px;
+        line-height: 1.8;
+      }
+      .hero-ctas {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        background: linear-gradient(135deg, var(--accent), #0099bb);
+        color: #060a14;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.3px;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0, 212, 255, 0.3);
+      }
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        background: transparent;
+        color: var(--text);
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        border: 1px solid var(--border);
+        transition: all 0.3s;
+      }
+      .btn-outline:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      /* ─── PROFILE CARD ─── */
+      .profile-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 36px;
+        position: relative;
+        overflow: hidden;
+      }
+      .profile-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+      }
+      .profile-img-wrap {
+        position: relative;
+        margin-bottom: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Rotating gradient ring behind the photo */
+      .profile-img-wrap::before {
+        content: '';
+        position: absolute;
+        inset: -6px;
+        border-radius: 50%;
+        background: conic-gradient(
+          from 0deg,
+          var(--accent),
+          var(--accent2),
+          #9d4fff,
+          var(--accent),
+          var(--accent2),
+          var(--accent)
+        );
+        animation: spinRing 4s linear infinite;
+        z-index: 0;
+      }
+
+      /* White/dark mask to create ring effect */
+      .profile-img-wrap::after {
+        content: '';
+        position: absolute;
+        inset: 2px;
+        border-radius: 50%;
+        background: var(--surface);
+        z-index: 1;
+      }
+
+      @keyframes spinRing {
+        to { transform: rotate(360deg); }
+      }
+
+      .profile-img {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+        position: relative;
+        z-index: 2;
+        box-shadow:
+          0 0 30px rgba(56, 189, 248, 0.25),
+          0 0 60px rgba(124, 58, 237, 0.15);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+      .profile-img:hover {
+        transform: scale(1.04);
+        box-shadow:
+          0 0 40px rgba(56, 189, 248, 0.4),
+          0 0 80px rgba(124, 58, 237, 0.25);
+      }
+
+      .profile-img-badge {
+        position: absolute;
+        bottom: -14px;
+        right: 10px;
+        background: linear-gradient(135deg, var(--accent2), #9d4fff);
+        color: white;
+        padding: 7px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 20px rgba(124, 58, 237, 0.5);
+        z-index: 3;
+        border: 1.5px solid rgba(255,255,255,0.15);
+      }
+      .profile-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 20px;
+      }
+      .stat {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+      }
+      .stat-num {
+        font-family: "Syne", sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--accent);
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 4px;
+        letter-spacing: 0.5px;
+      }
+
+      /* ─── SECTIONS COMMON ─── */
+      section {
+        position: relative;
+        z-index: 1;
+      }
+      .section-wrap {
+        padding: 80px 8%;
+      }
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 56px;
+      }
+      .section-num {
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        color: var(--accent);
+        font-weight: 600;
+        letter-spacing: 2px;
+      }
+      .section-title {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(28px, 4vw, 42px);
+        font-weight: 800;
+        letter-spacing: -1.5px;
+      }
+      .section-line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      /* ─── JOURNEY TIMELINE ─── */
+      .timeline {
+        position: relative;
+        padding-left: 40px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        bottom: 8px;
+        width: 1px;
+        background: linear-gradient(
+          to bottom,
+          var(--accent),
+          var(--accent2),
+          transparent
+        );
+      }
+      .timeline-item {
+        position: relative;
+        margin-bottom: 48px;
+        opacity: 0;
+        transform: translateX(-20px);
+        animation: slideIn 0.6s forwards;
+      }
+      .timeline-item:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .timeline-item:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .timeline-item:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .timeline-item:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      @keyframes slideIn {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .timeline-dot {
+        position: absolute;
+        left: -46px;
+        top: 6px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.15);
+      }
+      .timeline-year {
+        font-size: 12px;
+        color: var(--accent);
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+      .timeline-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px 28px;
+        transition:
+          border-color 0.3s,
+          transform 0.3s;
+      }
+      .timeline-card:hover {
+        border-color: rgba(0, 212, 255, 0.3);
+        transform: translateX(6px);
+      }
+      .timeline-title {
+        font-family: "Syne", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .timeline-desc {
+        color: #94a3b8;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      /* ─── SKILLS ─── */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      .skill-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 28px;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .skill-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 212, 255, 0.05),
+          transparent
+        );
+        transition: opacity 0.3s;
+      }
+      .skill-card:hover {
+        border-color: rgba(0, 212, 255, 0.3);
+        transform: translateY(-4px);
+      }
+      .skill-card:hover::after {
+        opacity: 1;
+      }
+      .skill-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        margin-bottom: 18px;
+      }
+      .skill-name {
+        font-family: "Syne", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+      .skill-bar-wrap {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 100px;
+        height: 6px;
+        overflow: hidden;
+        margin-bottom: 8px;
+      }
+      .skill-fill {
+        height: 100%;
+        border-radius: 100px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        transform-origin: left;
+        animation: growBar 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        transform: scaleX(0);
+      }
+      @keyframes growBar {
+        to {
+          transform: scaleX(1);
+        }
+      }
+      .skill-pct {
+        font-size: 13px;
+        color: var(--accent);
+        font-weight: 600;
+        text-align: right;
+      }
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 12px;
+      }
+      .skill-tag {
+        padding: 3px 10px;
+        background: rgba(0, 212, 255, 0.06);
+        border: 1px solid rgba(0, 212, 255, 0.15);
+        border-radius: 100px;
+        font-size: 11px;
+        color: var(--accent);
+      }
+
+      /* ─── AMBITIONS ─── */
+      .ambitions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+      }
+      .ambition-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 32px;
+        transition: all 0.3s;
+      }
+      .ambition-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(124, 58, 237, 0.4);
+      }
+      .ambition-icon {
+        font-size: 32px;
+        margin-bottom: 16px;
+        display: block;
+      }
+      .ambition-title {
+        font-family: "Syne", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .ambition-desc {
+        color: #94a3b8;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      /* ─── INTERESTS ─── */
+      .interests-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .interest-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 22px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        font-size: 14px;
+        font-weight: 400;
+        transition: all 0.3s;
+        cursor: default;
+      }
+      .interest-chip:hover {
+        background: rgba(0, 212, 255, 0.08);
+        border-color: rgba(0, 212, 255, 0.3);
+        color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .interest-chip span {
+        font-size: 20px;
+      }
+
+      /* ─── AI SECTION ─── */
+      .ai-section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 56px;
+        position: relative;
+        overflow: hidden;
+      }
+      .ai-section::before {
+        content: "";
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(124, 58, 237, 0.12) 0%,
+          transparent 70%
+        );
+      }
+      .ai-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .ai-quote {
+        font-family: "Syne", sans-serif;
+        font-size: clamp(22px, 3vw, 32px);
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: -1px;
+      }
+      .ai-quote em {
+        font-style: normal;
+        background: linear-gradient(135deg, var(--accent2), #9d4fff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .ai-points {
+        list-style: none;
+      }
+      .ai-points li {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        color: #94a3b8;
+        font-size: 15px;
+      }
+      .ai-points li::before {
+        content: "→";
+        color: var(--accent2);
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      /* ─── FOOTER ─── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 40px 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+      .footer-logo {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+      }
+      .footer-logo span {
+        color: var(--accent);
+      }
+      .footer-copy {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .footer-links {
+        display: flex;
+        gap: 20px;
+      }
+      .footer-link {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 13px;
+        transition: color 0.3s;
+      }
+      .footer-link:hover {
+        color: var(--accent);
+      }
+
+      /* ─── SCROLL REVEAL ─── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ─── RESPONSIVE ─── */
+      @media (max-width: 900px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+        }
+        .profile-card {
+          max-width: 380px;
+          margin: 0 auto;
+        }
+        .ai-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        footer {
+          flex-direction: column;
+          gap: 16px;
+          text-align: center;
+        }
+      }
+      @media (max-width: 600px) {
+        .section-wrap {
+          padding: 60px 5%;
+        }
+        .ai-section {
+          padding: 32px;
+        }
+        .hero {
+          padding: 100px 5% 60px;
+        }
+        nav {
+          padding: 18px 5%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- NAV -->
+    <nav>
+      <div class="nav-logo">E<span>.</span>MMANUEL</div>
+      <a href="index.html" class="nav-back">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path
+            d="M10 12L6 8L10 4"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </svg>
+        Retour au portfolio
+      </a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-tag">À propos</div>
+          <h1 class="hero-name">
+            Emmanuel
+            <span class="line-2">Diomandé</span>
+          </h1>
+          <p class="hero-role">
+            <strong>Développeur Fullstack</strong> en formation · Passionné
+            d'Intelligence Artificielle
+          </p>
+          <p class="hero-desc">
+            Je construis des expériences digitales modernes, de la conception à
+            l'implémentation. Mon objectif : maîtriser l'ensemble de la stack
+            web tout en me spécialisant dans les systèmes d'IA de demain.
+          </p>
+          <div class="hero-ctas">
+            <a href="#" class="btn-primary" download>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M8 1v9M4 7l4 4 4-4M2 13h12"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+              Télécharger mon CV
+            </a>
+            <a href="index.html#contact" class="btn-outline">Me contacter</a>
+          </div>
+        </div>
+        <div class="profile-card reveal">
+          <div class="profile-img-wrap">
+            <img
+              src="images/emmanuel.jpg"
+              alt="Emmanuel Diomandé"
+              class="profile-img"
+            />
+            <div class="profile-img-badge">🚀 Disponible</div>
+          </div>
+          <div class="profile-stats">
+            <div class="stat">
+              <div class="stat-num">1+</div>
+              <div class="stat-label">Ans de code</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">7+</div>
+              <div class="stat-label">Projets</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">5</div>
+              <div class="stat-label">Technos</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">∞</div>
+              <div class="stat-label">Ambition</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section class="section-wrap">
+      <div class="section-header reveal">
+        <span class="section-num">01</span>
+        <h2 class="section-title">Mon Parcours</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2024 — Début</div>
+          <div class="timeline-card">
+            <div class="timeline-title">Les premiers pas dans le code</div>
+            <p class="timeline-desc">
+              Début de mon parcours en développement web à l’Université de
+              Technologie d’Abidjan (UTA). Réalisation de mes premiers projets
+              en HTML/CSS et découverte des bases du web, marquant le point de
+              départ de mon engagement dans le domaine du développement
+              logiciel.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2025 — Progression</div>
+          <div class="timeline-card">
+            <div class="timeline-title">
+              JavaScript : les premières interactions prennent forme
+            </div>
+            <p class="timeline-desc">
+              Poursuite de ma progression en JavaScript à mon rythme. Découverte
+              de l’interactivité côté client à travers la réalisation de projets
+              simples, l’écriture de scripts et l’exploration des premières
+              notions d’API, avec persévérance et engagement dans
+              l’apprentissage malgré les difficultés.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div
+            class="timeline-dot"
+            style="
+              background: var(--accent3);
+              box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
+            "
+          ></div>
+          <div class="timeline-year">2025–2026 — Maintenant</div>
+          <div
+            class="timeline-card"
+            style="border-color: rgba(245, 158, 11, 0.2)"
+          >
+            <div class="timeline-title">
+              Évolution vers le Fullstack & exploration de l’IA ✦
+            </div>
+            <p class="timeline-desc">
+              En progression continue sur Python, Django, JavaScript et la
+              migration vers React. Réalisation de projets fullstack basiques
+              tout en développant un intérêt croissant pour l’intelligence
+              artificielle. Dans une démarche d’apprentissage constant,
+              j’explore de nouvelles technologies afin d’élargir mes compétences
+              et renforcer ma capacité à concevoir des solutions modernes et
+              évolutives.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section-wrap" style="padding-top: 0">
+      <div class="section-header reveal">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Compétences</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-icon" style="background: rgba(255, 165, 0, 0.1)">
+            🌐
+          </div>
+          <div class="skill-name">HTML / CSS</div>
+          <div class="skill-bar-wrap">
+            <div
+              class="skill-fill"
+              style="width: 92%; animation-delay: 0.2s"
+            ></div>
+          </div>
+          <div class="skill-pct">92%</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Semantic</span>
+            <span class="skill-tag">Flexbox</span>
+            <span class="skill-tag">Grid</span>
+            <span class="skill-tag">Animations</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon" style="background: rgba(255, 215, 0, 0.1)">
+            ⚡
+          </div>
+          <div class="skill-name">JavaScript</div>
+          <div class="skill-bar-wrap">
+            <div
+              class="skill-fill"
+              style="width: 78%; animation-delay: 0.3s"
+            ></div>
+          </div>
+          <div class="skill-pct">75%</div>
+          <div class="skill-tags">
+            <span class="skill-tag">ES6+</span>
+            <span class="skill-tag">DOM</span>
+            <span class="skill-tag">Fetch API</span>
+            <span class="skill-tag">Async</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon" style="background: rgba(0, 212, 255, 0.1)">
+            🐍
+          </div>
+          <div class="skill-name">Python</div>
+          <div class="skill-bar-wrap">
+            <div
+              class="skill-fill"
+              style="width: 65%; animation-delay: 0.4s"
+            ></div>
+          </div>
+          <div class="skill-pct">65%</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Scripts</span>
+            <span class="skill-tag">Data</span>
+            <span class="skill-tag">ML basics</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon" style="background: rgba(34, 197, 94, 0.1)">
+            🎸
+          </div>
+          <div class="skill-name">Django</div>
+          <div class="skill-bar-wrap">
+            <div
+              class="skill-fill"
+              style="width: 40%; animation-delay: 0.5s"
+            ></div>
+          </div>
+          <div class="skill-pct">40%</div>
+          <div class="skill-tags">
+            <span class="skill-tag">ORM</span>
+            <span class="skill-tag">Templates</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon" style="background: rgba(0, 0, 0, 0.1)">
+            🐙
+          </div>
+          <div class="skill-name">Git & GitHub</div>
+          <div class="skill-bar-wrap">
+            <div
+              class="skill-fill"
+              style="width: 80%; animation-delay: 0.3s"
+            ></div>
+          </div>
+          <div class="skill-pct">80%</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Versioning</span>
+            <span class="skill-tag">Branches</span>
+            <span class="skill-tag">Collaboration</span>
+            <span class="skill-tag">CI/CD</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-icon" style="background: rgba(0, 100, 200, 0.1)">
+            🐘
+          </div>
+          <div class="skill-name">PostgreSQL</div>
+          <div class="skill-bar-wrap">
+            <div
+              class="skill-fill"
+              style="width: 50%; animation-delay: 0.4s"
+            ></div>
+          </div>
+          <div class="skill-pct">50%</div>
+          <div class="skill-tags">
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Tables</span>
+            <span class="skill-tag">Relations</span>
+            <span class="skill-tag">Queries</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI AMBITION -->
+    <section class="section-wrap" style="padding-top: 0">
+      <div class="section-header reveal">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Vision IA</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="ai-section reveal">
+        <div class="ai-grid">
+          <div>
+            <p class="ai-quote">
+              L'IA ne remplace pas le développeur —<br />
+              elle devient son <em>super-pouvoir</em>.
+            </p>
+            <p
+              style="
+                color: #64748b;
+                margin-top: 20px;
+                font-size: 15px;
+                line-height: 1.7;
+              "
+            >
+              Je crois profondément que l'avenir du développement logiciel est à
+              l'intersection du code traditionnel et de l'intelligence
+              artificielle. C'est là que je veux me positionner.
+            </p>
+          </div>
+          <ul class="ai-points">
+            <li>
+              Développer des applications web augmentées par des modèles de
+              langage (LLMs) pour créer des expériences personnalisées et
+              intelligentes.
+            </li>
+            <li>
+              Maîtriser le fine-tuning et l'intégration d'APIs IA (OpenAI,
+              Anthropic, Hugging Face) dans des projets fullstack concrets.
+            </li>
+            <li>
+              Construire des outils d'automatisation intelligente qui permettent
+              aux équipes de se concentrer sur ce qui compte vraiment.
+            </li>
+            <li>
+              À terme, contribuer à des projets d'IA éthique et accessibles qui
+              créent un impact positif sur le continent africain.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- OBJECTIVES -->
+    <section class="section-wrap" style="padding-top: 0">
+      <div class="section-header reveal">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Objectifs</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="ambitions-grid">
+        <div class="ambition-card reveal">
+          <span class="ambition-icon">🏗️</span>
+          <div class="ambition-title">Devenir Ingénieur Senior</div>
+          <p class="ambition-desc">
+            Maîtriser l'ensemble de la stack, des bases de données aux
+            interfaces, et concevoir des architectures scalables capables de
+            tenir sous la charge.
+          </p>
+        </div>
+        <div class="ambition-card reveal">
+          <span class="ambition-icon">🤖</span>
+          <div class="ambition-title">Orientation IA & Innovation</div>
+          <p class="ambition-desc">
+            Développer une expertise solide en intelligence artificielle à
+            travers l’apprentissage continu, la réalisation de projets concrets
+            et l’exploration des technologies modernes. Mon objectif est de
+            concevoir des solutions intelligentes et innovantes, en combinant le
+            développement logiciel et l’IA, tout en contribuant à des projets à
+            fort impact.
+          </p>
+        </div>
+        <div class="ambition-card reveal">
+          <span class="ambition-icon">🌍</span>
+          <div class="ambition-title">Impact Africain</div>
+          <p class="ambition-desc">
+            Contribuer à la transformation du continent africain en participant
+            à la création de solutions technologiques innovantes. Mon ambition
+            est de m’impliquer dans des initiatives et projets qui utilisent le
+            numérique et l’intelligence artificielle pour répondre aux défis
+            réels, avec une vision de long terme orientée vers le développement,
+            l’autonomie et l’impact durable en Afrique.
+          </p>
+        </div>
+        <div class="ambition-card reveal">
+          <span class="ambition-icon">📖</span>
+          <div class="ambition-title">Partager & Former</div>
+          <p class="ambition-desc">
+            Écrire du contenu technique, créer des tutoriels et mentorier la
+            prochaine génération de développeurs africains passionnés par la
+            technologie.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERESTS -->
+    <section class="section-wrap" style="padding-top: 0">
+      <div class="section-header reveal">
+        <span class="section-num">05</span>
+        <h2 class="section-title">Centres d'intérêt</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="interests-wrap reveal">
+        <div class="interest-chip">
+          <span>🤖</span> Intelligence Artificielle
+        </div>
+        <div class="interest-chip"><span>💻</span> Open Source</div>
+        <div class="interest-chip"><span>📚</span> Lecture Tech</div>
+        <div class="interest-chip"><span>⚡</span> Développement personnel</div>
+        <div class="interest-chip"><span>🎵</span> Musique</div>
+        <div class="interest-chip"><span>⚽</span> Football</div>
+        <div class="interest-chip"><span>🌐</span> Cybersécurité</div>
+        <div class="interest-chip"><span>🚀</span> Entrepreneuriat</div>
+        <div class="interest-chip"><span>🎨</span> UI/UX Design</div>
+        <div class="interest-chip"><span>☕</span> Café & Code</div>
+        <div class="interest-chip"><span>🌍</span> Afrique Tech</div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-logo">E<span>.</span>MMANUEL</div>
+      <div class="footer-copy">© 2026 Emmanuel — Tous droits réservés</div>
+      <div class="footer-links">
+        <a href="index.html" class="footer-link">Portfolio</a>
+        <a href="https://github.com/emmanueldiom" class="footer-link">GitHub</a>
+        <a
+          href="https://www.linkedin.com/in/emmanuel-diomande-b3846234b/"
+          class="footer-link"
+          >LinkedIn</a
+        >
+      </div>
+    </footer>
+
+    <script>
+      // Scroll reveal
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((el) => {
+            if (el.isIntersecting) {
+              el.target.classList.add("visible");
+              observer.unobserve(el.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      // Stagger skill bars
+      const skillCards = document.querySelectorAll(".skill-card");
+      const skillObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const fill = entry.target.querySelector(".skill-fill");
+              if (fill) fill.style.animationPlayState = "running";
+            }
+          });
+        },
+        { threshold: 0.3 },
+      );
+      skillCards.forEach((card) => {
+        const fill = card.querySelector(".skill-fill");
+        if (fill) fill.style.animationPlayState = "paused";
+        skillObserver.observe(card);
+      });
+    </script>
+  </body>
+</html>
