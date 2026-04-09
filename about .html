@@ -795,6 +795,139 @@
           padding: 18px 5%;
         }
       }
+      /* ───────── RESPONSIVE FIX PRO ───────── */
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    text-align: center;
+  }
+
+  .hero-desc {
+    margin: 0 auto 30px;
+  }
+
+  .hero-ctas {
+    justify-content: center;
+  }
+
+  .profile-card {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  nav {
+    padding: 16px 5%;
+  }
+
+  .hero {
+    padding: 100px 5% 50px;
+  }
+
+  .hero-name {
+    font-size: 42px;
+    letter-spacing: -1px;
+  }
+
+  .hero-role {
+    font-size: 16px;
+  }
+
+  .hero-desc {
+    font-size: 14px;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-wrap {
+    padding: 60px 5%;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+
+  .timeline {
+    padding-left: 25px;
+  }
+
+  .timeline-dot {
+    left: -32px;
+  }
+
+  .timeline-card {
+    padding: 18px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .ai-section {
+    padding: 30px;
+  }
+
+  .ambitions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .interests-wrap {
+    justify-content: center;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
+
+/* PETIT MOBILE */
+@media (max-width: 480px) {
+  .hero-name {
+    font-size: 34px;
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+
+  .profile-card {
+    padding: 24px;
+  }
+
+  .profile-img {
+    width: 85%;
+  }
+
+  .stat-num {
+    font-size: 22px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+}
     </style>
   </head>
   <body>
