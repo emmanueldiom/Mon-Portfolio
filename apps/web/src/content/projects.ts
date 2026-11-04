@@ -32,6 +32,7 @@ export const caseStudies: CaseStudy[] = [
       "Les services gratuits de génération d'images ne répondent pas instantanément. Stable Horde place chaque demande dans une file d'attente partagée et la réponse peut prendre plusieurs minutes. L'interface doit rester utilisable pendant l'attente et expliquer clairement les échecs.",
     features: [
       'Saisie d’un prompt, avec une suggestion aléatoire parmi des exemples',
+      'Choix du format (carré, paysage, portrait) et du modèle, transmis au serveur',
       'Génération de 1 à 4 images, lancées l’une après l’autre avec 3 secondes d’écart',
       'Une carte de chargement par image, remplacée par le résultat ou par le message d’erreur',
       'Téléchargement de chaque image générée',
@@ -44,8 +45,8 @@ export const caseStudies: CaseStudy[] = [
         body: "Le serveur soumet la tâche, puis interroge son état toutes les 5 secondes. Après 36 tentatives (3 minutes), il abandonne et renvoie une erreur 502 avec un message explicite.",
       },
       {
-        title: 'Garder la clé côté serveur',
-        body: "La clé est lue dans les variables d'environnement du serveur. Le navigateur n'appelle que la route /generate de l'application.",
+        title: 'Protéger le serveur',
+        body: "La clé reste côté serveur et le navigateur n'appelle que /generate. Les entrées sont validées, seul le dossier public est servi, et le CORS reste fermé pour que d'autres sites ne consomment pas le quota.",
       },
       {
         title: 'Renvoyer une image directement',
@@ -53,8 +54,8 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     nextSteps: [
-      'Transmettre au serveur le format d’image et le modèle choisis dans l’interface',
       'Ajouter un second fournisseur pour prendre le relais quand la file d’attente est saturée',
+      'Afficher la position dans la file d’attente pendant la génération',
     ],
     learnings:
       "Travailler avec un service externe lent m'a appris à concevoir l'interface autour de l'attente et de l'échec, pas seulement autour du cas idéal.",
