@@ -1,0 +1,215 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+/*
+ * Direction « Signal ».
+ * Cyan : code et interaction. Violet : IA et vision, utilisé rarement.
+ * Un seul dégradé dans tout le site : le champ de points du Hero.
+ */
+@theme {
+  --color-ink: #07090f;
+  --color-ink-2: #0b0f18;
+  --color-panel: #0f141f;
+  --color-line: rgb(170 190 230 / 0.13);
+  --color-line-strong: rgb(170 190 230 / 0.24);
+  --color-fg: #e8ecf4;
+  --color-dim: #b6bfd0;
+  --color-muted: #8a93a8;
+  --color-cyan: #3ee3f0;
+  --color-violet: #a48cff;
+  --color-danger: #ff8a8a;
+
+  --font-display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --font-sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+  body {
+    min-height: 100svh;
+    background: var(--color-ink);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-cyan);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-left: max(2.5rem, env(safe-area-inset-left));
+      padding-right: max(2.5rem, env(safe-area-inset-right));
+    }
+  }
+  @media (min-width: 1280px) {
+    .shell {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+
+  /* Titres condensés : la personnalité du site. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-variation-settings: "wdth" 75, "opsz" 96;
+    letter-spacing: -0.025em;
+    line-height: 0.86;
+  }
+  .display-soft {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-variation-settings: "wdth" 88, "opsz" 48;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+  }
+  /* Annotations techniques : années, stack, coordonnées. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  /* Grain très léger sur tout le site, hérité de la page About d'origine. */
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Le champ du Hero s'efface vers le texte. */
+  .field-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%), linear-gradient(0deg, transparent 0%, #000 22%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+  }
+  @media (max-width: 1023px) {
+    .field-mask {
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 45%, #000 80%, transparent 100%);
+      mask-image: linear-gradient(180deg, transparent 0%, #000 45%, #000 80%, transparent 100%);
+    }
+  }
+
+  /* Photo en duotone, couleur réelle au survol. */
+  .duotone img {
+    filter: grayscale(1) contrast(1.08) brightness(0.95);
+    transition: filter 0.8s var(--ease-expo);
+  }
+  .duotone::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, var(--color-cyan), var(--color-violet));
+    mix-blend-mode: color;
+    opacity: 0.7;
+    transition: opacity 0.8s var(--ease-expo);
+    pointer-events: none;
+  }
+  .duotone:hover img,
+  .duotone:focus-within img {
+    filter: none;
+  }
+  .duotone:hover::after,
+  .duotone:focus-within::after {
+    opacity: 0;
+  }
+}
+
+/* Apparitions du premier écran, en CSS : elles démarrent avant le JavaScript. */
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.reveal-rise {
+  animation: rise 1.05s var(--ease-expo) both;
+}
+.fade-up {
+  animation: fade-up 0.9s var(--ease-expo) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-rise,
+  .fade-up {
+    animation: none;
+  }
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
