@@ -33,8 +33,18 @@ export const routes: PrerenderRoute[] = [
 ];
 
 export async function render(path: string): Promise<string> {
-  const { prelude } = await prerenderToNodeStream(<App initialPath={path} />);
+  // Par défaut, React sort à part toute section Suspense de plus de ~12 Ko et la remet
+  // en place avec des scripts intégrés ($RC). La CSP les bloque, ce qui casse l'hydratation
+  // (erreur React 419). Une limite infinie garde tout le HTML en place, sans script.
+  const { prelude } = await prerenderToNodeStream(<App initialPath={path} />, {
+    progressiveChunkSize: Number.MAX_SAFE_INTEGER,
+  });
   const chunks: Buffer[] = [];
   for await (const chunk of prelude) chunks.push(Buffer.from(chunk));
-  return Buffer.concat(chunks).toString('utf8');
+  const html = Buffer.concat(chunks).toString('utf8');
+
+  if (html.includes('<script') || html.includes('<template')) {
+    throw new Error(`Le pré-rendu de ${path} contient encore des scripts intégrés, bloqués par la CSP.`);
+  }
+  return html;
 }
